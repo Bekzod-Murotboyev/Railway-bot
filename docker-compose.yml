@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  railway:
+    build:
+      context: .
+      target: development
+    ports:
+      - 8082:8082
+    environment:
+      - SERVER_PORT=8082
+      - POSTGRES_URL=jdbc:postgresql://postgresqlServer/rail_way
+      - HIBERNATE_MODE=create
+    volumes:
+      - ./:/app
+
+  postgresqlServer:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=5939523
+      - POSTGRES_DATABASE=rail_way
+    volumes:
+      - postgresql_data:/var/lib/postgresql
+      - postgresql_config:/etc/postgresql/conf.d
+volumes:
+  postgresql_data:
+  postgresql_config:
